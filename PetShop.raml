@@ -21,22 +21,22 @@ resourceTypes:
         200:
           body:
             application/json:
-              type: Pet[]
+              type: <<item>>[]
     post:
       body:
         application/json:
-          type: Pet
+          type: <<item>>
   Member:
     put:
       body:
         application/json:
-          type: Pet
+          type: <<item>>
     delete:
       responses:
         204:
 
 /pets:
-  type: Collection
+  type:  { Collection: {item : Pet } }
 
   /{id}:
-    type: Member
+    type:  { Member: {item : Pet } }
