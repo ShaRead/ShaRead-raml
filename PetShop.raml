@@ -35,8 +35,23 @@ resourceTypes:
       responses:
         204:
 
+traits:
+  FilterableByPrice:
+    queryParameters:
+      priceLessThen?:
+        type: number
+      priceMoreThen?:
+        type: number
+
+
 /pets:
   type:  { Collection: {item : Pet } }
+  get:
+    is:
+      - FilterableByPrice
+    queryParameters:
+      petKind:
+        enum: [bird, mammal]
 
   /{id}:
     type:  { Member: {item : Pet } }
