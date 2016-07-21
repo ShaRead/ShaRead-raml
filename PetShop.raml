@@ -9,10 +9,22 @@ types:
       name: string
       kind: string
       price: number
+      color:
+        enum:
+          - White
+          - Black
+          - Colored
     example:
       name: "Snoopy"
       kind: "Mammal"
       price: 100
+      color: White
+  Mammal:
+    type: Pet
+  Bird:
+    type: Pet
+    properties:
+      wingLength: number
 
 resourceTypes:
   Collection:
