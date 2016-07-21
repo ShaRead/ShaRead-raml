@@ -9,6 +9,10 @@ types:
       name: string
       kind: string
       price: number
+    example:
+      name: "Snoopy"
+      kind: "Mammal"
+      price: 100
 
 /pets:
   get:
@@ -20,12 +24,7 @@ types:
     body:
       application/json:
         type: Pet
-        example: |
-          {
-            "name": "Snoopy",
-            "kind": "Mammal",
-            "price": 100
-          }
+
   /{id}:
     put:
       body:
