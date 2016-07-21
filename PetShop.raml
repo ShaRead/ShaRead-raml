@@ -5,6 +5,7 @@ baseUri: /shop
 
 types:
   Pet:
+    discriminator: kind
     properties:
       name: string
       kind: string
@@ -64,6 +65,21 @@ traits:
     queryParameters:
       petKind:
         enum: [bird, mammal]
-
   /{id}:
     type:  { Member: {item : Pet } }
+
+/birds:
+  type: { Collection: {item: Bird} }
+  get:
+    is:
+      - FilterableByPrice
+  /{id}:
+    type: { Member: {item : Bird} }
+
+/mammals:
+  type: { Collection: {item: Mammal} }
+  get:
+    is:
+      - FilterableByPrice
+  /{id}:
+    type: { Member: {item : Mammal} }
