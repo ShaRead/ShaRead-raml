@@ -3,6 +3,13 @@ title: Pet shop
 version: 1
 baseUri: /shop
 
+types:
+  Pet:
+    properties:
+      name: string
+      kind: string
+      price: number
+
 /pets:
   get:
     responses:
@@ -12,6 +19,13 @@ baseUri: /shop
   post:
     body:
       application/json:
+        type: Pet
+        example: |
+          {
+            "name": "Snoopy",
+            "kind": "Mammal",
+            "price": 100
+          }
   /{id}:
     put:
       body:
