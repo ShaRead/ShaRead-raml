@@ -1,0 +1,21 @@
+#%RAML 1.0
+title: Pet shop
+version: 1
+baseUri: /shop
+
+/pets:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+  post:
+    body:
+      application/json:
+  /{id}:
+    put:
+      body:
+        application/json:
+    delete:
+      responses:
+        204:
