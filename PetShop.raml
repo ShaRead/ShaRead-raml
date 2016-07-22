@@ -1,85 +1,41 @@
 #%RAML 1.0
 title: Pet shop
+uses:
+  PetLibrary: PetLibrary.raml
 version: 1
 baseUri: /shop
 
 types:
-  Pet:
-    discriminator: kind
-    properties:
-      name: string
-      kind: string
-      price: number
-      color:
-        enum:
-          - White
-          - Black
-          - Colored
-    example:
-      name: "Snoopy"
-      kind: "Mammal"
-      price: 100
-      color: White
   Mammal:
-    type: Pet
+    type: PetLibrary.Pet
   Bird:
-    type: Pet
+    type: PetLibrary.Pet
     properties:
       wingLength: number
 
-resourceTypes:
-  Collection:
-    get:
-      responses:
-        200:
-          body:
-            application/json:
-              type: <<item>>[]
-    post:
-      body:
-        application/json:
-          type: <<item>>
-  Member:
-    put:
-      body:
-        application/json:
-          type: <<item>>
-    delete:
-      responses:
-        204:
-
-traits:
-  FilterableByPrice:
-    queryParameters:
-      priceLessThen?:
-        type: number
-      priceMoreThen?:
-        type: number
-
-
 /pets:
-  type:  { Collection: {item : Pet } }
+  type:  { PetLibrary.Collection: {item : PetLibrary.Pet } }
   get:
     is:
-      - FilterableByPrice
+      - PetLibrary.FilterableByPrice
     queryParameters:
       petKind:
         enum: [bird, mammal]
   /{id}:
-    type:  { Member: {item : Pet } }
+    type:  { PetLibrary.Member: {item : PetLibrary.Pet } }
 
 /birds:
-  type: { Collection: {item: Bird} }
+  type: { PetLibrary.Collection: {item: Bird} }
   get:
     is:
-      - FilterableByPrice
+      - PetLibrary.FilterableByPrice
   /{id}:
-    type: { Member: {item : Bird} }
+    type: { PetLibrary.Member: {item : Bird} }
 
 /mammals:
-  type: { Collection: {item: Mammal} }
+  type: { PetLibrary.Collection: {item: Mammal} }
   get:
     is:
-      - FilterableByPrice
+      - PetLibrary.FilterableByPrice
   /{id}:
-    type: { Member: {item : Mammal} }
+    type: { PetLibrary.Member: {item : Mammal} }
